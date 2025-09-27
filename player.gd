@@ -7,7 +7,7 @@ extends CharacterBody2D
 @export var grounded_display_time: float = 0.15
 
 # Your volume scale uses dB (e.g., -40 .. -10). Jump when volume >= threshold.
-@export var volume_threshold: float = -25.0
+@export var volume_threshold: float = -23.0
 @export var jump_cooldown_ms: int = 150    # prevent rapid re-triggers while yelling
 
 @onready var sprite: Sprite2D = $Sprite2D
@@ -44,7 +44,7 @@ func _physics_process(delta: float) -> void:
 
 	# Also allow keyboard jump if you want: OR Input.is_action_just_pressed("ui_up")
 	if rising and now_ms >= next_allowed_jump_ms:
-		velocity.y = (-cos(rotation) * (400 + micstrength * (Globals.volume - volume_threshold)))
+		velocity.y = (-cos(rotation) * (467 + micstrength * (Globals.volume - volume_threshold)))
 		grounded_time = grounded_display_time
 		next_allowed_jump_ms = now_ms + jump_cooldown_ms
 		did_jump = true
