@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pahvcau72oot"
-path="res://.godot/imported/Pogo-3.png.png-ddf75df131fd59a706bcde98d80017bc.ctex"
+uid="uid://cqwm3aa0wrpvq"
+path="res://.godot/imported/DirtBottom.png-922d23adf72c6374d99146191adef0e0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Pogo-3.png.png"
-dest_files=["res://.godot/imported/Pogo-3.png.png-ddf75df131fd59a706bcde98d80017bc.ctex"]
+source_file="res://Sprites/Tiles/DirtBottom.png"
+dest_files=["res://.godot/imported/DirtBottom.png-922d23adf72c6374d99146191adef0e0.ctex"]
 
 [params]
 

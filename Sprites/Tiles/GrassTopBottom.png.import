@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://khvptftd8x24"
-path="res://.godot/imported/Pogo-2.png.png-8de10c796135d90d5fd48f78420d02bb.ctex"
+uid="uid://dhxjexkmvxlv0"
+path="res://.godot/imported/GrassTopBottom.png-1d8480aff9875d3dc745afe38d7d77f1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Pogo-2.png.png"
-dest_files=["res://.godot/imported/Pogo-2.png.png-8de10c796135d90d5fd48f78420d02bb.ctex"]
+source_file="res://Sprites/Tiles/GrassTopBottom.png"
+dest_files=["res://.godot/imported/GrassTopBottom.png-1d8480aff9875d3dc745afe38d7d77f1.ctex"]
 
 [params]
 
