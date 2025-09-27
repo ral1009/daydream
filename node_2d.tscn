@@ -1,8 +1,8 @@
-[gd_scene load_steps=14 format=4 uid="uid://bcxr08085d677"]
+[gd_scene load_steps=15 format=4 uid="uid://bcxr08085d677"]
 
 [ext_resource type="Script" uid="uid://8xs0n355trel" path="res://player.gd" id="1_0e48y"]
 [ext_resource type="Texture2D" uid="uid://cimqks1uqj43c" path="res://Pogo-1.png.png" id="2_q6r6c"]
-[ext_resource type="Script" uid="uid://cphjcfopykfxa" path="res://player2.gd" id="3_epypp"]
+[ext_resource type="Script" path="res://player2.gd" id="3_epypp"]
 [ext_resource type="Texture2D" uid="uid://pahvcau72oot" path="res://Pogo-3.png.png" id="4_kdubu"]
 [ext_resource type="Texture2D" uid="uid://khvptftd8x24" path="res://Pogo-2.png.png" id="6_rj586"]
 [ext_resource type="Texture2D" uid="uid://cp5srklsw66gu" path="res://Pogo-4.png.png" id="7_4d7sh"]
@@ -31,6 +31,55 @@ tile_size = Vector2i(352, 352)
 physics_layer_0/collision_layer = 1
 sources/2 = SubResource("TileSetAtlasSource_d21ai")
 sources/3 = SubResource("TileSetAtlasSource_4d7sh")
+
+[sub_resource type="GDScript" id="GDScript_rj586"]
+script/source = "extends Node
+
+signal http_data(angle_rad: float, volume: float)
+
+var http_request: HTTPRequest
+
+var angle_rad: float = 0.0
+var volume: float = 0.0
+var has_angle := false
+var has_volume := false
+
+func _ready() -> void:
+	http_request = HTTPRequest.new()
+	add_child(http_request)
+	http_request.request_completed.connect(_on_request_completed)
+	_poll_data()
+
+func _poll_data() -> void:
+	var err = http_request.request(\"http://127.0.0.1:8080/data\")
+	if err != OK:
+		print(\"Error making request:\", err)
+	get_tree().create_timer(0.2).timeout.connect(_poll_data)  # poll ~5x/sec
+
+func _on_request_completed(result, response_code, headers, body) -> void:
+	if response_code != 200:
+		print(\"HTTP error:\", response_code)
+		return
+
+	var json := JSON.new()
+	if json.parse(body.get_string_from_utf8()) != OK:
+		print(\"JSON parse error\")
+		return
+
+	var data = json.get_data()
+	# Expecting: {\"angle\":\"12.3°\", \"volume\": 0.42} from your Flask server
+	if \"angle\" in data:
+		var s := str(data[\"angle\"]).strip_edges()
+		s = s.replace(\"°\", \"\")
+		if s != \"\":
+			Globals.angle_rad = deg_to_rad(float(s))
+			Globals.has_angle = true
+			
+	if \"volume\" in data:
+		Globals.volume = float(data[\"volume\"])
+		Globals.has_volume = true
+		#print(Globals.volume)
+"
 
 [node name="Node2D" type="Node2D"]
 
@@ -76,3 +125,8 @@ scale = Vector2(0.3, 0.3)
 tile_map_data = PackedByteArray("AAAAAAQAAgAAAAAAAAABAAQAAgAAAAAAAAACAAQAAgAAAAAAAAADAAQAAgAAAAAAAAAEAAQAAgAAAAAAAAAFAAQAAgAAAAAAAAAGAAQAAgAAAAAAAAAHAAQAAgAAAAAAAAAIAAQAAgAAAAAAAAAJAAQAAgAAAAAAAAAKAAQAAgAAAAAAAAAAAAUAAwAAAAAAAAABAAUAAwAAAAAAAAACAAUAAwAAAAAAAAADAAUAAwAAAAAAAAAEAAUAAwAAAAAAAAAFAAUAAwAAAAAAAAAGAAUAAwAAAAAAAAAHAAUAAwAAAAAAAAAIAAUAAwAAAAAAAAAJAAUAAwAAAAAAAAAKAAUAAwAAAAAAAAAAAAYAAwAAAAAAAAABAAYAAwAAAAAAAAACAAYAAwAAAAAAAAADAAYAAwAAAAAAAAAEAAYAAwAAAAAAAAAFAAYAAwAAAAAAAAAGAAYAAwAAAAAAAAAHAAYAAwAAAAAAAAAIAAYAAwAAAAAAAAAJAAYAAwAAAAAAAAAKAAYAAwAAAAAAAAD8/wQAAgAAAAAAAAD9/wQAAgAAAAAAAAD+/wQAAgAAAAAAAAD//wQAAgAAAAAAAAALAAQAAgAAAAAAAAAMAAQAAgAAAAAAAAANAAQAAgAAAAAAAAAOAAQAAgAAAAAAAAAPAAQAAgAAAAAAAAAQAAQAAgAAAAAAAAD8/wUAAwAAAAAAAAD8/wYAAwAAAAAAAAD9/wUAAwAAAAAAAAD9/wYAAwAAAAAAAAD+/wUAAwAAAAAAAAD+/wYAAwAAAAAAAAD//wUAAwAAAAAAAAD//wYAAwAAAAAAAAALAAUAAwAAAAAAAAALAAYAAwAAAAAAAAAMAAUAAwAAAAAAAAAMAAYAAwAAAAAAAAANAAUAAwAAAAAAAAANAAYAAwAAAAAAAAAOAAUAAwAAAAAAAAAOAAYAAwAAAAAAAAAPAAUAAwAAAAAAAAAPAAYAAwAAAAAAAAAQAAUAAwAAAAAAAAAQAAYAAwAAAAAAAAA=")
 tile_set = SubResource("TileSet_kdubu")
 collision_visibility_mode = 2
+
+[node name="Node" type="Node" parent="."]
+script = SubResource("GDScript_rj586")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="Node"]
