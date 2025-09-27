@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
-@export var jump_strength: float = 400.0
-@export var micstrength: float = 800.0
+@export var micstrength: float = 1100.0
 @export var speed: float = 600.0
 @export var gravity: float = 1200.0
 @export var rotation_speed: float = 180.0
@@ -43,3 +42,13 @@ func _physics_process(delta: float):
 		sprite.texture = air_texture
 
 	move_and_slide()
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		if collider and collider.is_in_group("spike"):
+			die()
+
+
+func die():
+	var tree = Engine.get_main_loop() as SceneTree
+	tree.change_scene_to_file("res://node_2d.tscn")
