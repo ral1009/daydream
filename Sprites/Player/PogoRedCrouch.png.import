@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pahvcau72oot"
-path="res://.godot/imported/Pogo-3.png.png-ddf75df131fd59a706bcde98d80017bc.ctex"
+uid="uid://cp5srklsw66gu"
+path="res://.godot/imported/PogoRedCrouch.png-81bb007cdef3931d5af34a55887694be.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Pogo-3.png.png"
-dest_files=["res://.godot/imported/Pogo-3.png.png-ddf75df131fd59a706bcde98d80017bc.ctex"]
+source_file="res://Sprites/Player/PogoRedCrouch.png"
+dest_files=["res://.godot/imported/PogoRedCrouch.png-81bb007cdef3931d5af34a55887694be.ctex"]
 
 [params]
 

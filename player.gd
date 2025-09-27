@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var jump_strength: float = 400.0
 @export var micstrength: float = 800.0
-@export var speed: float = 400.0
+@export var speed: float = 600.0
 @export var gravity: float = 1200.0
 @export var rotation_speed: float = 180.0
 

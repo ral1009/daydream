@@ -1,13 +1,17 @@
-[gd_scene load_steps=14 format=4 uid="uid://bcxr08085d677"]
+[gd_scene load_steps=22 format=4 uid="uid://bcxr08085d677"]
 
 [ext_resource type="Script" uid="uid://8xs0n355trel" path="res://player.gd" id="1_0e48y"]
-[ext_resource type="Texture2D" uid="uid://cimqks1uqj43c" path="res://Pogo-1.png.png" id="2_q6r6c"]
+[ext_resource type="Texture2D" uid="uid://cimqks1uqj43c" path="res://Sprites/Player/PogoBlueStand.png" id="2_q6r6c"]
 [ext_resource type="Script" uid="uid://cphjcfopykfxa" path="res://player2.gd" id="3_epypp"]
-[ext_resource type="Texture2D" uid="uid://pahvcau72oot" path="res://Pogo-3.png.png" id="4_kdubu"]
-[ext_resource type="Texture2D" uid="uid://khvptftd8x24" path="res://Pogo-2.png.png" id="6_rj586"]
-[ext_resource type="Texture2D" uid="uid://cp5srklsw66gu" path="res://Pogo-4.png.png" id="7_4d7sh"]
-[ext_resource type="Texture2D" uid="uid://srht6gjhm1no" path="res://Grass.png" id="7_d21ai"]
-[ext_resource type="Texture2D" uid="uid://62w5vlfdj4wc" path="res://Dirt.png" id="8_rj586"]
+[ext_resource type="Texture2D" uid="uid://pahvcau72oot" path="res://Sprites/Player/PogoRedStand.png" id="4_kdubu"]
+[ext_resource type="Texture2D" uid="uid://khvptftd8x24" path="res://Sprites/Player/PogoBlueCrouch.png" id="6_rj586"]
+[ext_resource type="Texture2D" uid="uid://cp5srklsw66gu" path="res://Sprites/Player/PogoRedCrouch.png" id="7_4d7sh"]
+[ext_resource type="Texture2D" uid="uid://srht6gjhm1no" path="res://Sprites/Tiles/Grass.png" id="7_d21ai"]
+[ext_resource type="Texture2D" uid="uid://62w5vlfdj4wc" path="res://Sprites/Tiles/Dirt.png" id="8_rj586"]
+[ext_resource type="Texture2D" uid="uid://cp0ig772fg0su" path="res://Sprites/Tiles/GrassLeftEdge.png" id="9_4d7sh"]
+[ext_resource type="Texture2D" uid="uid://dq2uijef20hr7" path="res://Sprites/Tiles/GrassRightEdge.png" id="10_ir8iy"]
+[ext_resource type="Texture2D" uid="uid://dwlymtupue7e" path="res://Sprites/Tiles/DirtLeftEdge.png" id="11_x0ka3"]
+[ext_resource type="Texture2D" uid="uid://brbd5a3gpmkf1" path="res://Sprites/Tiles/DirtRightEdge.png" id="12_0h7mo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y32ns"]
 size = Vector2(106.5437, 121.541115)
@@ -26,11 +30,39 @@ texture = ExtResource("8_rj586")
 texture_region_size = Vector2i(352, 352)
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ir8iy"]
+texture = ExtResource("9_4d7sh")
+texture_region_size = Vector2i(352, 352)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-176, -176, -176, 176, 176, 176, 176, -176)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hqns4"]
+texture = ExtResource("10_ir8iy")
+texture_region_size = Vector2i(352, 352)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-176, -176, -176, 176, 176, 176, 176, -176)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nr8wp"]
+texture = ExtResource("11_x0ka3")
+texture_region_size = Vector2i(352, 352)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-176, -176, -176, 176, 176, 176, 176, -176)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d2bti"]
+texture = ExtResource("12_0h7mo")
+texture_region_size = Vector2i(352, 352)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-176, -176, -176, 176, 176, 176, 176, -176)
+
 [sub_resource type="TileSet" id="TileSet_kdubu"]
 tile_size = Vector2i(352, 352)
 physics_layer_0/collision_layer = 1
 sources/2 = SubResource("TileSetAtlasSource_d21ai")
 sources/3 = SubResource("TileSetAtlasSource_4d7sh")
+sources/4 = SubResource("TileSetAtlasSource_ir8iy")
+sources/5 = SubResource("TileSetAtlasSource_hqns4")
+sources/6 = SubResource("TileSetAtlasSource_nr8wp")
+sources/7 = SubResource("TileSetAtlasSource_d2bti")
 
 [node name="Node2D" type="Node2D"]
 
@@ -65,6 +97,7 @@ air_texture = ExtResource("4_kdubu")
 position = Vector2(0.666626, 3.6666718)
 scale = Vector2(0.20066342, 0.9273121)
 shape = SubResource("RectangleShape2D_d21ai")
+disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Player2"]
 position = Vector2(2, 7.333557)
@@ -73,6 +106,6 @@ texture = ExtResource("4_kdubu")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 scale = Vector2(0.3, 0.3)
-tile_map_data = PackedByteArray("AAAAAAQAAgAAAAAAAAABAAQAAgAAAAAAAAACAAQAAgAAAAAAAAADAAQAAgAAAAAAAAAEAAQAAgAAAAAAAAAFAAQAAgAAAAAAAAAGAAQAAgAAAAAAAAAHAAQAAgAAAAAAAAAIAAQAAgAAAAAAAAAJAAQAAgAAAAAAAAAKAAQAAgAAAAAAAAAAAAUAAwAAAAAAAAABAAUAAwAAAAAAAAACAAUAAwAAAAAAAAADAAUAAwAAAAAAAAAEAAUAAwAAAAAAAAAFAAUAAwAAAAAAAAAGAAUAAwAAAAAAAAAHAAUAAwAAAAAAAAAIAAUAAwAAAAAAAAAJAAUAAwAAAAAAAAAKAAUAAwAAAAAAAAAAAAYAAwAAAAAAAAABAAYAAwAAAAAAAAACAAYAAwAAAAAAAAADAAYAAwAAAAAAAAAEAAYAAwAAAAAAAAAFAAYAAwAAAAAAAAAGAAYAAwAAAAAAAAAHAAYAAwAAAAAAAAAIAAYAAwAAAAAAAAAJAAYAAwAAAAAAAAAKAAYAAwAAAAAAAAD8/wQAAgAAAAAAAAD9/wQAAgAAAAAAAAD+/wQAAgAAAAAAAAD//wQAAgAAAAAAAAALAAQAAgAAAAAAAAAMAAQAAgAAAAAAAAANAAQAAgAAAAAAAAAOAAQAAgAAAAAAAAAPAAQAAgAAAAAAAAAQAAQAAgAAAAAAAAD8/wUAAwAAAAAAAAD8/wYAAwAAAAAAAAD9/wUAAwAAAAAAAAD9/wYAAwAAAAAAAAD+/wUAAwAAAAAAAAD+/wYAAwAAAAAAAAD//wUAAwAAAAAAAAD//wYAAwAAAAAAAAALAAUAAwAAAAAAAAALAAYAAwAAAAAAAAAMAAUAAwAAAAAAAAAMAAYAAwAAAAAAAAANAAUAAwAAAAAAAAANAAYAAwAAAAAAAAAOAAUAAwAAAAAAAAAOAAYAAwAAAAAAAAAPAAUAAwAAAAAAAAAPAAYAAwAAAAAAAAAQAAUAAwAAAAAAAAAQAAYAAwAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAAAAQAAgAAAAAAAAABAAQAAgAAAAAAAAACAAQAAgAAAAAAAAADAAQAAgAAAAAAAAAEAAQAAgAAAAAAAAAFAAQAAgAAAAAAAAAGAAQAAgAAAAAAAAAHAAQAAgAAAAAAAAAAAAUAAwAAAAAAAAABAAUAAwAAAAAAAAACAAUAAwAAAAAAAAADAAUAAwAAAAAAAAAEAAUAAwAAAAAAAAAFAAUAAwAAAAAAAAAGAAUAAwAAAAAAAAAHAAUAAwAAAAAAAAAAAAYAAwAAAAAAAAABAAYAAwAAAAAAAAACAAYAAwAAAAAAAAADAAYAAwAAAAAAAAAEAAYAAwAAAAAAAAAFAAYAAwAAAAAAAAAGAAYAAwAAAAAAAAAHAAYAAwAAAAAAAAD8/wQAAgAAAAAAAAD9/wQAAgAAAAAAAAD+/wQAAgAAAAAAAAD//wQAAgAAAAAAAAD8/wUAAwAAAAAAAAD8/wYAAwAAAAAAAAD9/wUAAwAAAAAAAAD9/wYAAwAAAAAAAAD+/wUAAwAAAAAAAAD+/wYAAwAAAAAAAAD//wUAAwAAAAAAAAD//wYAAwAAAAAAAAAIAAQAAgAAAAAAAAAIAAUAAwAAAAAAAAAIAAYAAwAAAAAAAAAJAAQABQAAAAAAAAAJAAUABwAAAAAAAAAJAAYABwAAAAAAAAAMAAMAAgAAAAAAAAAMAAQAAwAAAAAAAAAMAAUAAwAAAAAAAAAMAAYAAwAAAAAAAAANAAMAAgAAAAAAAAANAAQAAwAAAAAAAAANAAUAAwAAAAAAAAANAAYAAwAAAAAAAAAOAAMABQAAAAAAAAAOAAQABwAAAAAAAAAOAAUABwAAAAAAAAAOAAYABwAAAAAAAAALAAMABAAAAAAAAAALAAQABgAAAAAAAAALAAUABgAAAAAAAAALAAYABgAAAAAAAAA=")
 tile_set = SubResource("TileSet_kdubu")
 collision_visibility_mode = 2
