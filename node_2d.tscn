@@ -1,36 +1,78 @@
-[gd_scene load_steps=5 format=3 uid="uid://bcxr08085d677"]
+[gd_scene load_steps=14 format=4 uid="uid://bcxr08085d677"]
 
 [ext_resource type="Script" uid="uid://8xs0n355trel" path="res://player.gd" id="1_0e48y"]
-[ext_resource type="Texture2D" uid="uid://bo5m0mtg48c40" path="res://icon.svg" id="1_wtcfe"]
+[ext_resource type="Texture2D" uid="uid://cimqks1uqj43c" path="res://Pogo-1.png.png" id="2_q6r6c"]
+[ext_resource type="Script" uid="uid://cphjcfopykfxa" path="res://player2.gd" id="3_epypp"]
+[ext_resource type="Texture2D" uid="uid://pahvcau72oot" path="res://Pogo-3.png.png" id="4_kdubu"]
+[ext_resource type="Texture2D" uid="uid://khvptftd8x24" path="res://Pogo-2.png.png" id="6_rj586"]
+[ext_resource type="Texture2D" uid="uid://cp5srklsw66gu" path="res://Pogo-4.png.png" id="7_4d7sh"]
+[ext_resource type="Texture2D" uid="uid://srht6gjhm1no" path="res://Grass.png" id="7_d21ai"]
+[ext_resource type="Texture2D" uid="uid://62w5vlfdj4wc" path="res://Dirt.png" id="8_rj586"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y32ns"]
-size = Vector2(125.5, 124.5)
+size = Vector2(106.5437, 121.541115)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wtcfe"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d21ai"]
+size = Vector2(106.313965, 120.06027)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d21ai"]
+texture = ExtResource("7_d21ai")
+0:0/size_in_atlas = Vector2i(22, 22)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-176.21744, -176.55896, -175.75204, 175.75201, 175.53442, 175.87593, 176.21747, -177.24197)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4d7sh"]
+texture = ExtResource("8_rj586")
+texture_region_size = Vector2i(352, 352)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_kdubu"]
+tile_size = Vector2i(352, 352)
+physics_layer_0/collision_layer = 1
+sources/2 = SubResource("TileSetAtlasSource_d21ai")
+sources/3 = SubResource("TileSetAtlasSource_4d7sh")
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(505, 262)
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_0e48y")
+ground_texture = ExtResource("6_rj586")
+air_texture = ExtResource("2_q6r6c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(-0.25, -0.75)
-scale = Vector2(0.28000122, 1)
+position = Vector2(1, 3.1765594)
+scale = Vector2(0.20455909, -0.90762746)
 shape = SubResource("RectangleShape2D_y32ns")
 
-[node name="Sprite2D" type="Sprite2D" parent="Player/CollisionShape2D"]
-position = Vector2(0.25, 0.75)
-texture = ExtResource("1_wtcfe")
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+position = Vector2(2, 7.333374)
+scale = Vector2(0.22000062, 0.31428528)
+texture = ExtResource("2_q6r6c")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(71, 582)
+[node name="Camera2D" type="Camera2D" parent="Player"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(461.69354, -1.7978516)
-scale = Vector2(62.16021, 7.156285)
-shape = SubResource("RectangleShape2D_wtcfe")
+[node name="Player2" type="CharacterBody2D" parent="."]
+visible = false
+position = Vector2(505, 262)
+scale = Vector2(1.5, 1.5)
+script = ExtResource("3_epypp")
+ground_texture = ExtResource("7_4d7sh")
+air_texture = ExtResource("4_kdubu")
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/CollisionShape2D"]
-scale = Vector2(0.15733564, 0.14918838)
-texture = ExtResource("1_wtcfe")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
+position = Vector2(0.666626, 3.6666718)
+scale = Vector2(0.20066342, 0.9273121)
+shape = SubResource("RectangleShape2D_d21ai")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player2"]
+position = Vector2(2, 7.333557)
+scale = Vector2(0.2171, 0.3178)
+texture = ExtResource("4_kdubu")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+scale = Vector2(0.3, 0.3)
+tile_map_data = PackedByteArray("AAAAAAQAAgAAAAAAAAABAAQAAgAAAAAAAAACAAQAAgAAAAAAAAADAAQAAgAAAAAAAAAEAAQAAgAAAAAAAAAFAAQAAgAAAAAAAAAGAAQAAgAAAAAAAAAHAAQAAgAAAAAAAAAIAAQAAgAAAAAAAAAJAAQAAgAAAAAAAAAKAAQAAgAAAAAAAAAAAAUAAwAAAAAAAAABAAUAAwAAAAAAAAACAAUAAwAAAAAAAAADAAUAAwAAAAAAAAAEAAUAAwAAAAAAAAAFAAUAAwAAAAAAAAAGAAUAAwAAAAAAAAAHAAUAAwAAAAAAAAAIAAUAAwAAAAAAAAAJAAUAAwAAAAAAAAAKAAUAAwAAAAAAAAAAAAYAAwAAAAAAAAABAAYAAwAAAAAAAAACAAYAAwAAAAAAAAADAAYAAwAAAAAAAAAEAAYAAwAAAAAAAAAFAAYAAwAAAAAAAAAGAAYAAwAAAAAAAAAHAAYAAwAAAAAAAAAIAAYAAwAAAAAAAAAJAAYAAwAAAAAAAAAKAAYAAwAAAAAAAAD8/wQAAgAAAAAAAAD9/wQAAgAAAAAAAAD+/wQAAgAAAAAAAAD//wQAAgAAAAAAAAALAAQAAgAAAAAAAAAMAAQAAgAAAAAAAAANAAQAAgAAAAAAAAAOAAQAAgAAAAAAAAAPAAQAAgAAAAAAAAAQAAQAAgAAAAAAAAD8/wUAAwAAAAAAAAD8/wYAAwAAAAAAAAD9/wUAAwAAAAAAAAD9/wYAAwAAAAAAAAD+/wUAAwAAAAAAAAD+/wYAAwAAAAAAAAD//wUAAwAAAAAAAAD//wYAAwAAAAAAAAALAAUAAwAAAAAAAAALAAYAAwAAAAAAAAAMAAUAAwAAAAAAAAAMAAYAAwAAAAAAAAANAAUAAwAAAAAAAAANAAYAAwAAAAAAAAAOAAUAAwAAAAAAAAAOAAYAAwAAAAAAAAAPAAUAAwAAAAAAAAAPAAYAAwAAAAAAAAAQAAUAAwAAAAAAAAAQAAYAAwAAAAAAAAA=")
+tile_set = SubResource("TileSet_kdubu")
+collision_visibility_mode = 2

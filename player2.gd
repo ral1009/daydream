@@ -19,10 +19,10 @@ func _physics_process(delta: float):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-		if Input.is_action_pressed("ui_left"):
+		if Input.is_action_pressed("p2left"):
 			if rotation > -0.61:
 				rotation -= deg_to_rad(rotation_speed) * delta
-		elif Input.is_action_pressed("ui_right"):
+		elif Input.is_action_pressed("p2right"):
 			if rotation < 0.61:
 				rotation += deg_to_rad(rotation_speed) * delta
 
@@ -30,7 +30,7 @@ func _physics_process(delta: float):
 	if is_on_floor():
 		grounded_time = grounded_display_time   # refresh timer
 		velocity.x = sin(rotation) * speed
-		if Input.is_action_pressed("ui_up"):
+		if Input.is_action_pressed("p2up"):
 			velocity.y = -cos(rotation) * micstrength
 		else:
 			velocity.y = -cos(rotation) * speed
