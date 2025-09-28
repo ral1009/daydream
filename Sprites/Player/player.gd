@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var micstrength: float = 50.0
-@export var speed: float = 400.0
+@export var speed: float = 300.0
 @export var gravity: float = 1200.0
 @export var rotation_speed: float = 180.0
 @export var grounded_display_time: float = 0.15
@@ -44,7 +44,7 @@ func _physics_process(delta: float) -> void:
 
 	# Also allow keyboard jump if you want: OR Input.is_action_just_pressed("ui_up")
 	if rising and now_ms >= next_allowed_jump_ms:
-		velocity.y = 1.4 * (-cos(rotation) * (467 + micstrength * (Globals.volume - volume_threshold)))
+		velocity.y = (-cos(rotation) * (467 + micstrength * (Globals.volume - volume_threshold)))
 		grounded_time = grounded_display_time
 		next_allowed_jump_ms = now_ms + jump_cooldown_ms
 		did_jump = true
@@ -64,13 +64,3 @@ func _physics_process(delta: float) -> void:
 		sprite.texture = air_texture
 
 	move_and_slide()
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		var collider = collision.get_collider()
-		if collider and collider.is_in_group("spike"):
-			die()
-
-
-func die():
-	var tree = Engine.get_main_loop() as SceneTree
-	tree.change_scene_to_file("res://node_2d.tscn")
